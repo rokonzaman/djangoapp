@@ -25,13 +25,15 @@ pipeline {
             }
         }
 
-        stage('Build Deploy Code') {
+        stage('Deploy Master') {
                 when {
                     branch 'master'
                 }
                 steps {
                     sh """
-                    echo "Building Artifact"
+                    echo "Create Image"
+                    echo "Push Image"
+                    echo "kubernetes deployment"
                     """
 
                     sh """
