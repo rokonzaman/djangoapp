@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: django
-        image: rokonzaman/demoapp
+        image: rokonzaman/master_django:latest
         ports:
         - containerPort: 8000
           name: django-pod-port
