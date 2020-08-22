@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django
+spec:
+  selector:
+    matchLabels:
+      app: django
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      containers:
+      - name: django
+        image: rokonzaman/demoapp
+        ports:
+        - containerPort: 8000
+          name: django-pod-port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: django
+  labels:
+    app: django
+spec:
+  type: NodePort
+  ports:
+  - port: 8000
+    targetPort: django-pod-port
+    nodePort: 31112
+    protocol: TCP
+  selector:
+    app: django
