@@ -15,7 +15,7 @@ pipeline {
 
 
  stages {
-    
+
         stage('Deploy Master') {
                 when {
                     branch 'master'
@@ -23,6 +23,7 @@ pipeline {
                 steps {
                     sh """
                     echo "Create Image"
+                    docker build -t rokonzaman/master_django:latest Multibranch_master/.
                     echo "Push Image"
                     echo "kubernetes deployment"
                     """
