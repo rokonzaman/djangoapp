@@ -23,7 +23,7 @@ pipeline {
                 steps {
                     sh """
                     echo "Create Image"
-                    docker build -t rokonzaman/master_django:latest Multibranch_master/.
+                    docker build -t rokonzaman/master_django:latest /root/jenkins-agent/workspace/Multibranch_master/.
                     echo "Push Image"
                     echo "kubernetes deployment"
                     """
