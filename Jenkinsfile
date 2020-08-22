@@ -15,16 +15,7 @@ pipeline {
 
 
  stages {
-    stage('Code Checkout') {
-            steps {
-                checkout([
-                    $class: 'GitSCM',
-                    branches: [[name: '*/main']],
-                    userRemoteConfigs: [[url: 'https://github.com/rokonzaman/djangoapp.git']]
-                ])
-            }
-        }
-
+    
         stage('Deploy Master') {
                 when {
                     branch 'master'
