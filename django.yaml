@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: master_django
+  name: master
 spec:
   selector:
     matchLabels:
-      app: master_django
+      app: master
   replicas: 3
   template:
     metadata:
       labels:
-        app: master_django
+        app: master
     spec:
       containers:
-      - name: master_django
+      - name: master
         image: rokonzaman/master_django:latest
         ports:
         - containerPort: 8000
@@ -22,9 +22,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: master_django
+  name: master
   labels:
-    app: master_django
+    app: master
 spec:
   type: NodePort
   ports:
@@ -33,4 +33,4 @@ spec:
     nodePort: 31112
     protocol: TCP
   selector:
-    app: master_django
+    app: master
