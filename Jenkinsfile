@@ -21,15 +21,20 @@ pipeline {
                     branch 'master'
                 }
                 steps {
+
                     sh """
                     echo "Create Image"
                     docker build -t rokonzaman/master_django:latest /root/jenkins-agent/workspace/Multibranch_master/.
-                    echo "Push Image"
-                    echo "kubernetes deployment"
                     """
 
                     sh """
-                    echo "Deploying Code"
+                    echo "Push Image"
+                    docker push rokonzaman/master_django:latest
+                    """
+                    
+                    sh """
+                    echo "kubernetes deployment"
+                    kubectl apply -f /root/jenkins-agent/workspace/Multibranch_master/django.yaml
                     """
                 }
             }
