@@ -20,14 +20,14 @@ pipeline {
                 checkout([
                     $class: 'GitSCM',
                     branches: [[name: '*/main']],
-                    userRemoteConfigs: [[url: 'https://github.com/spring-projects/spring-petclinic.git']]
+                    userRemoteConfigs: [[url: 'https://github.com/rokonzaman/djangoapp.git']]
                 ])
             }
         }
 
         stage('Build Deploy Code') {
                 when {
-                    branch 'develop'
+                    branch 'master'
                 }
                 steps {
                     sh """
