@@ -17,7 +17,7 @@ spec:
         image: rokonzaman/master_django:latest
         ports:
         - containerPort: 8000
-          name: master-django-pod-port
+          name: master-pod-port
 ---
 apiVersion: v1
 kind: Service
@@ -29,7 +29,7 @@ spec:
   type: NodePort
   ports:
   - port: 8000
-    targetPort: master-django-pod-port
+    targetPort: master-pod-port
     nodePort: 31112
     protocol: TCP
   selector:
