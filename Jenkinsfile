@@ -34,7 +34,7 @@ pipeline {
         steps{
             sh "chmod +x changeTag.sh"
             sh "./changeTag.sh ${DOCKER_TAG}"
-            sh " kubectl apply -f ."
+            sh " kubectl apply -f django-Development.yaml"
         }
     }
 
