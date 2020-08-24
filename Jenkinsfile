@@ -13,7 +13,7 @@ pipeline {
 //-----------------------
         stage('Build Image'){
             steps{
-                sh "docker build . -t rokonzaman/django:${DOCKER_TAG}"
+                sh "docker build . -t kworker3.rokon.local:5000/django:${DOCKER_TAG}"
             }
         }
 
@@ -22,8 +22,8 @@ pipeline {
         stage('Push Image'){
             steps{
             withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerHubPwd')]) {
-                sh "docker login -u rokonzaman -p ${dockerHubPwd}"
-                sh "docker push rokonzaman/django:${DOCKER_TAG}"
+  //            sh "docker login -u rokonzaman -p ${dockerHubPwd}"
+                sh "docker push kworker3.rokon.local:5000/django:${DOCKER_TAG}"
             }
         }
     }
