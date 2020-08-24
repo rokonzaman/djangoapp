@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        node {
+            label: 'kmaster'
+        }
+    }
     environment{
         DOCKER_TAG = getDockerTag()
     }
