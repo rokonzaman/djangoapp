@@ -1,43 +1,18 @@
 pipeline {
-
-    agent {
-        node {
-            label 'kmaster'
-        }
+    agent any
+    environment{
+        DOCKER_TAG = getDockerTag()
     }
-
-    options {
-        buildDiscarder logRotator(
-                    daysToKeepStr: '16',
-                    numToKeepStr: '10'
-            )
-    }
-
-
- stages {
-
-        stage('Deploy Master') {
-                when {
-                    branch 'master'
-                }
-                steps {
-
-                    sh """
-                    echo "Create Image"
-                    docker build -t rokonzaman/master_django:latest /root/jenkins-agent/workspace/Multibranch_master/.
-                    """
-
-                    sh """
-                    echo "Push Image"
-                    docker push rokonzaman/master_django:latest
-                    """
-                    
-                    sh """
-                    echo "kubernetes deployment"
-                    kubectl apply -f /root/jenkins-agent/workspace/Multibranch_master/django.yaml
-                    """
-                }
+    stages{
+        stage('Build Docker Image'){
+            steps{
+                sh "docker build -t rokonzaman/django:${DOCKER_TAG}"
             }
-
         }
     }
+}
+
+def getDockerTag(){
+    def tag = sh script: 'git rev-parse HEAD', returnStdout: true
+    return tag
+}
