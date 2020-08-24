@@ -9,9 +9,15 @@ pipeline {
     }
     stages{
 
-        stage('Build Docker Image'){
+        stage('Build Image'){
             steps{
                 sh "docker build . -t rokonzaman/django:${DOCKER_TAG}"
+            }
+        }
+
+        stage('Push Image'){
+            steps{
+                sh "docker push rokonzaman/django:${DOCKER_TAG}"
             }
         }
 
