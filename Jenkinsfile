@@ -17,7 +17,7 @@ pipeline {
 
         stage('Push Image'){
             steps{
-            withCredentials([usernameColonPassword(credentialsId: 'dockerhub', variable: 'dockerHubPwd')]) {
+            withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerHubPwd')]) {
                 sh "docker login -u rokonzaman -p ${dockerHubPwd}"
                 sh "docker push rokonzaman/django:${DOCKER_TAG}"
             }
