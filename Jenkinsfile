@@ -7,13 +7,17 @@ pipeline {
     environment{
         DOCKER_TAG = getDockerTag()
     }
-    stages{
 
+// ###################################################################
+    stages{
+//-----------------------
         stage('Build Image'){
             steps{
                 sh "docker build . -t rokonzaman/django:${DOCKER_TAG}"
             }
         }
+
+//-----------------------
 
         stage('Push Image'){
             steps{
@@ -23,9 +27,21 @@ pipeline {
             }
         }
     }
+
+//-----------------------
+
+    stage('Deploy to k8s'){
+        steps{
+            sh "chmod +x changeTag.sh"
+            sh "./changeTag ${DOCKER_TAG}"
+            sh " kubectl apply -f ."
+        }
+    }
+
   }
 }
 
+// #############################################################################
 def getDockerTag(){
     def tag = sh script: 'git rev-parse HEAD', returnStdout: true
     return tag
