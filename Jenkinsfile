@@ -9,12 +9,6 @@ pipeline {
     }
     stages{
 
-        stage('Git Checkout'){
-            steps{
-                git credentialsId: 'github', url: 'https://github.com/rokonzaman/djangoapp'
-            }
-        }
-
         stage('Build Docker Image'){
             steps{
                 sh "docker build . -t rokonzaman/django:${DOCKER_TAG}"
