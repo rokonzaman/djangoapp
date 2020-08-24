@@ -33,7 +33,7 @@ pipeline {
     stage('Deploy to k8s'){
         steps{
             sh "chmod +x changeTag.sh"
-            sh "./changeTag ${DOCKER_TAG}"
+            sh "./changeTag.sh ${DOCKER_TAG}"
             sh " kubectl apply -f ."
         }
     }
