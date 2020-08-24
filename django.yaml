@@ -1,37 +1,37 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: django-deployment
+  name: prod-deployment
 spec:
   selector:
     matchLabels:
-      app: dev
+      app: prod
   replicas: 3
   template:
     metadata:
       labels:
-        app: dev
+        app: prod
     spec:
       containers:
-      - name: dev
+      - name: prod
         image: rokonzaman/django:tagVersion
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
-          name: master-pod-port
+          name: prod-port
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: dev-svc
+  name: prod-svc
   labels:
     app: dev
 spec:
   type: NodePort
   ports:
   - port: 8000
-    targetPort: master-pod-port
-    nodePort: 31113
+    targetPort: prod-port
+    nodePort: 31114
     protocol: TCP
   selector:
-    app: dev
+    app: prod
