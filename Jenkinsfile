@@ -27,7 +27,7 @@ pipeline {
 
         stage('Remove Image'){
             steps{
-                sh "docker rm kworker3.rokon.local:5000/django:${DOCKER_TAG}"
+                sh "docker rmi kworker3.rokon.local:5000/django:${DOCKER_TAG}"
             }
         }
 
