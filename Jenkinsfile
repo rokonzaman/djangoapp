@@ -7,6 +7,9 @@ pipeline {
     environment{
         DOCKER_TAG = getDockerTag()
     }
+    triggers {
+        pollSCM('* * * * *')
+    }
 
 // ###################################################################
     stages{
