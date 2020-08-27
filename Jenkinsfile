@@ -4,6 +4,9 @@ pipeline {
             label 'kmaster'
         }
     }
+    triggers {
+        pollSCM('* * * * *')
+    }
     environment{
         DOCKER_TAG = getDockerTag()
     }
