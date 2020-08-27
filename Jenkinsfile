@@ -18,10 +18,10 @@ pipeline {
 
         stage('Push Image'){
             steps{
-          withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerHubPwd')]) {
+  //        withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerHubPwd')]) {
   //            sh "docker login -u rokonzaman -p ${dockerHubPwd}"
                 sh "docker push kworker3.rokon.local:5000/django:${DOCKER_TAG}"
-            }
+ //            }
         }
     }
 
