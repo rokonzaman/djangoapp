@@ -1,7 +1,7 @@
 pipeline {
     agent {
         node {
-            label 'kmaster'
+            label 'k8s'
         }
     }
     triggers {
